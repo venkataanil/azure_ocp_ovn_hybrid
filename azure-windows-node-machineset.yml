@@ -1,0 +1,208 @@
+apiVersion: v1
+items:
+- apiVersion: machine.openshift.io/v1beta1
+  kind: MachineSet
+  metadata:
+    creationTimestamp: null
+    labels:
+      machine.openshift.io/cluster-api-cluster: venkataanil-889-winc-cj8l2
+      machine.openshift.io/cluster-api-machine-role: worker
+      machine.openshift.io/cluster-api-machine-type: worker
+    name: vkom-win1
+    namespace: openshift-machine-api
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        machine.openshift.io/cluster-api-cluster: venkataanil-889-winc-cj8l2
+        machine.openshift.io/cluster-api-machineset: vkom-win1
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          machine.openshift.io/os-id: Windows
+          machine.openshift.io/cluster-api-cluster: venkataanil-889-winc-cj8l2
+          machine.openshift.io/cluster-api-machine-role: worker
+          machine.openshift.io/cluster-api-machine-type: worker
+          machine.openshift.io/cluster-api-machineset: vkom-win1
+      spec:
+        metadata:
+          creationTimestamp: null
+          labels:
+            node-role.kubernetes.io/worker: ""
+        providerSpec:
+          value:
+            apiVersion: azureproviderconfig.openshift.io/v1beta1
+            credentialsSecret:
+              name: azure-cloud-credentials
+              namespace: openshift-machine-api
+            image:
+              offer: WindowsServer
+              publisher: MicrosoftWindowsServer
+              resourceID: ""
+              sku: "2019-Datacenter-with-Containers"
+              version: latest
+            internalLoadBalancer: ""
+            kind: AzureMachineProviderSpec
+            location: centralus
+            managedIdentity: venkataanil-889-winc-cj8l2-identity
+            metadata:
+              creationTimestamp: null
+            natRule: null
+            networkResourceGroup: ""
+            osDisk:
+              diskSizeGB: 128
+              managedDisk:
+                storageAccountType: Premium_LRS
+              osType: Windows
+            publicIP: false
+            publicLoadBalancer: ""
+            resourceGroup: venkataanil-889-winc-cj8l2-rg
+            sshPrivateKey: ""
+            sshPublicKey: ""
+            subnet: venkataanil-889-winc-cj8l2-worker-subnet
+            userDataSecret:
+              name: windows-user-data
+            vmSize: Standard_D8s_v3
+            vnet: venkataanil-889-winc-cj8l2-vnet
+            zone: "1"
+  status:
+    replicas: 0
+- apiVersion: machine.openshift.io/v1beta1
+  kind: MachineSet
+  metadata:
+    creationTimestamp: null
+    labels:
+      machine.openshift.io/cluster-api-cluster: venkataanil-889-winc-cj8l2
+      machine.openshift.io/cluster-api-machine-role: worker
+      machine.openshift.io/cluster-api-machine-type: worker
+    name: vkom-win2
+    namespace: openshift-machine-api
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        machine.openshift.io/cluster-api-cluster: venkataanil-889-winc-cj8l2
+        machine.openshift.io/cluster-api-machineset: vkom-win2
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          machine.openshift.io/os-id: Windows
+          machine.openshift.io/cluster-api-cluster: venkataanil-889-winc-cj8l2
+          machine.openshift.io/cluster-api-machine-role: worker
+          machine.openshift.io/cluster-api-machine-type: worker
+          machine.openshift.io/cluster-api-machineset: vkom-win2
+      spec:
+        metadata:
+          creationTimestamp: null
+          labels:
+            node-role.kubernetes.io/worker: ""
+        providerSpec:
+          value:
+            apiVersion: azureproviderconfig.openshift.io/v1beta1
+            credentialsSecret:
+              name: azure-cloud-credentials
+              namespace: openshift-machine-api
+            image:
+              offer: WindowsServer
+              publisher: MicrosoftWindowsServer
+              resourceID: ""
+              sku: "2019-Datacenter-with-Containers"
+              version: latest
+            internalLoadBalancer: ""
+            kind: AzureMachineProviderSpec
+            location: centralus
+            managedIdentity: venkataanil-889-winc-cj8l2-identity
+            metadata:
+              creationTimestamp: null
+            natRule: null
+            networkResourceGroup: ""
+            osDisk:
+              diskSizeGB: 128
+              managedDisk:
+                storageAccountType: Premium_LRS
+              osType: Windows
+            publicIP: false
+            publicLoadBalancer: ""
+            resourceGroup: venkataanil-889-winc-cj8l2-rg
+            sshPrivateKey: ""
+            sshPublicKey: ""
+            subnet: venkataanil-889-winc-cj8l2-worker-subnet
+            userDataSecret:
+              name: windows-user-data
+            vmSize: Standard_D8s_v3
+            vnet: venkataanil-889-winc-cj8l2-vnet
+            zone: "2"
+  status:
+    replicas: 0
+- apiVersion: machine.openshift.io/v1beta1
+  kind: MachineSet
+  metadata:
+    creationTimestamp: null
+    labels:
+      machine.openshift.io/cluster-api-cluster: venkataanil-889-winc-cj8l2
+      machine.openshift.io/cluster-api-machine-role: worker
+      machine.openshift.io/cluster-api-machine-type: worker
+    name: vkom-win3
+    namespace: openshift-machine-api
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        machine.openshift.io/cluster-api-cluster: venkataanil-889-winc-cj8l2
+        machine.openshift.io/cluster-api-machineset: vkom-win3
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          machine.openshift.io/os-id: Windows
+          machine.openshift.io/cluster-api-cluster: venkataanil-889-winc-cj8l2
+          machine.openshift.io/cluster-api-machine-role: worker
+          machine.openshift.io/cluster-api-machine-type: worker
+          machine.openshift.io/cluster-api-machineset: vkom-win3
+      spec:
+        metadata:
+          creationTimestamp: null
+          labels:
+            node-role.kubernetes.io/worker: ""
+        providerSpec:
+          value:
+            apiVersion: azureproviderconfig.openshift.io/v1beta1
+            credentialsSecret:
+              name: azure-cloud-credentials
+              namespace: openshift-machine-api
+            image:
+              offer: WindowsServer
+              publisher: MicrosoftWindowsServer
+              resourceID: ""
+              sku: "2019-Datacenter-with-Containers"
+              version: latest
+            internalLoadBalancer: ""
+            kind: AzureMachineProviderSpec
+            location: centralus
+            managedIdentity: venkataanil-889-winc-cj8l2-identity
+            metadata:
+              creationTimestamp: null
+            natRule: null
+            networkResourceGroup: ""
+            osDisk:
+              diskSizeGB: 128
+              managedDisk:
+                storageAccountType: Premium_LRS
+              osType: Windows
+            publicIP: false
+            publicLoadBalancer: ""
+            resourceGroup: venkataanil-889-winc-cj8l2-rg
+            sshPrivateKey: ""
+            sshPublicKey: ""
+            subnet: venkataanil-889-winc-cj8l2-worker-subnet
+            userDataSecret:
+              name: windows-user-data
+            vmSize: Standard_D8s_v3
+            vnet: venkataanil-889-winc-cj8l2-vnet
+            zone: "3"
+  status:
+    replicas: 0
+kind: List
+metadata: {}

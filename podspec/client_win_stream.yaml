@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: win-uperfclient
+  name: win-uperfclient
+spec:
+  selector:
+    matchLabels:
+      app: win-uperfclient
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: win-uperfclient
+      name: win-uperfclient
+    spec:
+      tolerations:
+      - key: "os"
+        value: "Windows"
+        Effect: "NoSchedule"
+      containers:
+      - name: windowsuperfclient
+        image: quay.io/krvoora_ocm/windows:uperf
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: config-volume
+          mountPath: c:\uperf\uperf
+        command:
+        - powershell.exe
+        - -command
+        - c:\uperf\uperf.exe -v -a -R -i 1 -m c:\uperf\uperf\uperf-stream-tcp-16384-16384-1 -P 30000;c:\uperf\uperf.exe -v -a -R -i 1 -m c:\uperf\uperf\uperf-stream-tcp-16384-16384-1 -P 30000;c:\uperf\uperf.exe -v -a -R -i 1 -m c:\uperf\uperf\uperf-stream-tcp-16384-16384-1 -P 30000;c:\uperf\uperf.exe -v -a -R -i 1 -m c:\uperf\uperf\uperf-stream-tcp-16384-16384-1 -P 30000;c:\uperf\uperf.exe -v -a -R -i 1 -m c:\uperf\uperf\uperf-stream-tcp-16384-16384-1 -P 30000
+        securityContext:
+          windowsOptions:
+            runAsUserName: "ContainerAdministrator"
+      volumes:
+      - name: config-volume
+        configMap:
+          name: uperf-test1
+      nodeSelector:
+        kubernetes.io/os: windows
+        kubernetes.io/hostname: <windows_host>

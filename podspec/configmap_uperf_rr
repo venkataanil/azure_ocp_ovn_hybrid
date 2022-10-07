@@ -1,0 +1,20 @@
+apiVersion: v1
+data:
+  uperf-rr-tcp-1024-1024-1: |
+    <?xml version=1.0?>
+    <profile name="rr-tcp-1024-1024-1">
+          <group nthreads="1">
+          <transaction iterations="1">
+            <flowop type="connect" options="remotehost=10.132.0.61 protocol=tcp port=30001"/>
+          </transaction>
+          <transaction duration="60">
+            <flowop type=write options="size=1024"/>
+            <flowop type=read  options="size=1024"/>
+          <transaction iterations="1">
+            <flowop type=disconnect />
+          </transaction>
+      </group>
+                </profile>
+kind: ConfigMap
+metadata:
+  name: uperf-test1

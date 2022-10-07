@@ -1,0 +1,20 @@
+apiVersion: v1
+data:
+  uperf-stream-tcp-16384-16384-1: |
+    <?xml version=1.0?>
+    <profile name="stream-tcp-16384-16384-1">
+              <group nthreads="1">
+          <transaction iterations="1">
+            <flowop type="connect" options="remotehost=$server_pod_ip protocol=tcp port=30001"/>
+          </transaction>
+          <transaction duration="60">
+            <flowop type=write options="count=16 size=16384"/>
+          </transaction>
+          <transaction iterations="1">
+            <flowop type=disconnect />
+          </transaction>
+      </group>
+            </profile>
+kind: ConfigMap
+metadata:
+  name: uperf-test1

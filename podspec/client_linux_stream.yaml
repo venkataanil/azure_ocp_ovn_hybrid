@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: lin-uperfclient
+  name: lin-uperfclient
+spec:
+  selector:
+    matchLabels:
+      app: lin-uperfclient
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: lin-uperfclient
+      name: lin-uperfclient
+    spec:
+      containers:
+      - name: linuxuperfclient
+        image: quay.io/venkataanil/uperf-linux:latest
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: config-volume
+          mountPath: /tmp/uperf-test
+        args:
+        - uperf -v -a -R -i 1 -m /tmp/uperf-test/uperf-stream-tcp-1024-1024-1 -P 30000;uperf -v -a -R -i 1 -m /tmp/uperf-test/uperf-stream-tcp-1024-1024-1 -P 30000;uperf -v -a -R -i 1 -m /tmp/uperf-test/uperf-stream-tcp-1024-1024-1 -P 30000; uperf -v -a -R -i 1 -m /tmp/uperf-test/uperf-stream-tcp-1024-1024-1 -P 30000; uperf -v -a -R -i 1 -m /tmp/uperf-test/uperf-stream-tcp-1024-1024-1 -P 30000;
+        command:
+        - /bin/sh
+        - -c
+      volumes:
+      - name: config-volume
+        configMap:
+          name: uperf-test1
+      nodeSelector:
+        kubernetes.io/hostname: <linux_host>

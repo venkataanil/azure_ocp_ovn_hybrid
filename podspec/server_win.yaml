@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: win-uperfserver
+  name: win-uperfserver
+spec:
+  selector:
+    matchLabels:
+      app: win-uperfserver
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: win-uperfserver
+      name: win-uperfserver
+    spec:
+      tolerations:
+      - key: "os"
+        value: "Windows"
+        Effect: "NoSchedule"
+      containers:
+      - name: windowsuperfserver
+        image: quay.io/krvoora_ocm/windows:uperf
+        imagePullPolicy: IfNotPresent
+        command:
+        - powershell.exe
+        - -command
+        - c:\uperf\uperf.exe -s -v -P 30000
+        securityContext:
+          windowsOptions:
+            runAsUserName: "ContainerAdministrator"
+      nodeSelector:
+        kubernetes.io/os: windows
+        kubernetes.io/hostname: <windows_host>

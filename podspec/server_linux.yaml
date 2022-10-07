@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: lin-uperfserver
+  name: lin-uperfserver
+spec:
+  selector:
+    matchLabels:
+      app: lin-uperfserver
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: lin-uperfserver
+      name: lin-uperfserver
+    spec:
+      containers:
+      - name: linuxuperfserver
+        image: quay.io/venkataanil/uperf-linux:latest
+        imagePullPolicy: Always
+        args:
+        - uperf -s -v -P 30000
+        command:
+        - /bin/sh
+        - -c
+        securityContext:
+         capabilities:
+           drop:
+           - MKNOD
+      nodeSelector:
+        kubernetes.io/hostname: <linux_host>
